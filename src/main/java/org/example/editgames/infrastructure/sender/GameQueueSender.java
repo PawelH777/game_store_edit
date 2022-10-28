@@ -2,7 +2,7 @@ package org.example.editgames.infrastructure.sender;
 
 import org.example.editgames.infrastructure.model.Game;
 
-public interface GameSender {
+public interface GameQueueSender {
 
     void sendMessageWithGameInfo(Game game);
 }

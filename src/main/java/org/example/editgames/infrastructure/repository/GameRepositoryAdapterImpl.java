@@ -3,7 +3,7 @@ package org.example.editgames.infrastructure.repository;
 import org.example.editgames.domain.model.GameDO;
 import org.example.editgames.domain.model.GameStatus;
 import org.example.editgames.infrastructure.model.Game;
-import org.example.editgames.infrastructure.sender.GameSender;
+import org.example.editgames.infrastructure.sender.GameQueueSender;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -13,11 +13,11 @@ public class GameRepositoryAdapterImpl implements GameRepositoryAdapter {
 
     private final GameRepository gameRepository;
 
-    private final GameSender gameSender;
+    private final GameQueueSender gameQueueSender;
 
-    public GameRepositoryAdapterImpl(final GameRepository crudRepository, final GameSender gameSender) {
+    public GameRepositoryAdapterImpl(final GameRepository crudRepository, final GameQueueSender gameQueueSender) {
         this.gameRepository = crudRepository;
-        this.gameSender = gameSender;
+        this.gameQueueSender = gameQueueSender;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class GameRepositoryAdapterImpl implements GameRepositoryAdapter {
                     .build();
 
             final Game updatedGame = gameRepository.save(game);
-            gameSender.sendMessageWithGameInfo(updatedGame);
+            gameQueueSender.sendMessageWithGameInfo(updatedGame);
         });
     }
 }
