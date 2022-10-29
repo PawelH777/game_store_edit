@@ -25,6 +25,7 @@ public class GameQueueSenderImpl implements GameQueueSender {
                 .id(game.getId())
                 .name(game.getName())
                 .genre(game.getGenre())
+                .price(game.getPrice())
                 .status(game.getGameStatus())
                 .build();
 

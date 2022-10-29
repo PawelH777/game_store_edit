@@ -41,6 +41,7 @@ public class GameController {
         return GameDO.builder()
                 .name(gameDraft.getName())
                 .genre(gameDraft.getGenre())
+                .price(gameDraft.getPrice())
                 .gameStatus(gameStatus)
                 .build();
     }

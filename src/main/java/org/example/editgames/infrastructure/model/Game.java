@@ -5,6 +5,7 @@ import org.example.editgames.domain.model.GameStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -23,6 +24,9 @@ public class Game implements Serializable {
 
     @Column
     private String genre;
+
+    @Column
+    private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
     @Column

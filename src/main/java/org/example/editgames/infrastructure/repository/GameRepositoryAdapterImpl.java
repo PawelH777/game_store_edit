@@ -25,6 +25,7 @@ public class GameRepositoryAdapterImpl implements GameRepositoryAdapter {
         final Game game = Game.builder()
                 .name(gameDO.getName())
                 .genre(gameDO.getGenre())
+                .price(gameDO.getPrice())
                 .gameStatus(gameDO.getGameStatus())
                 .build();
 
@@ -38,6 +39,7 @@ public class GameRepositoryAdapterImpl implements GameRepositoryAdapter {
                 .id(id)
                 .name(gameDO.getName())
                 .genre(gameDO.getGenre())
+                .price(gameDO.getPrice())
                 .gameStatus(gameDO.getGameStatus())
                 .build();
 
@@ -53,6 +55,7 @@ public class GameRepositoryAdapterImpl implements GameRepositoryAdapter {
                     .id(id)
                     .name(oldGame.getName())
                     .genre(oldGame.getGenre())
+                    .price(oldGame.getPrice())
                     .gameStatus(gameStatus)
                     .build();
 
