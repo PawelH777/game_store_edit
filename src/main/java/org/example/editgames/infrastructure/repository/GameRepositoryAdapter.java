@@ -10,4 +10,6 @@ public interface GameRepositoryAdapter {
     void save(long id, GameDO gameDO);
 
     void save(long id, GameStatus gameStatus);
+
+    void deleteById(long id);
 }

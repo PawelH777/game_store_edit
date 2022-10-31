@@ -1,5 +1,6 @@
 package org.example.editgames.application.controller;
 
+import org.example.editgames.application.model.ChangeGameStatusRequest;
 import org.example.editgames.application.model.CreateGameResponse;
 import org.example.editgames.application.model.GameDraftRequest;
 import org.example.editgames.domain.model.GameDO;
@@ -32,10 +33,17 @@ public class GameController {
     }
 
     @PatchMapping("{id}")
-    ResponseEntity<Object> publishGame(@PathVariable final long id) {
-        gameService.changeGameStatus(id, GameStatus.PUBLISHED);
+    ResponseEntity<Object> changeGameStatus(@PathVariable final long id, @RequestBody final ChangeGameStatusRequest changeGameStatusRequest) {
+        gameService.changeGameStatus(id, changeGameStatusRequest.getGameStatus());
         return ResponseEntity.status(200).build();
     }
+
+    @DeleteMapping("{id}")
+    ResponseEntity<Object> deleteGame(@PathVariable final long id) {
+        gameService.deleteGame(id);
+        return ResponseEntity.status(200).build();
+    }
+
 
     private GameDO buildGame(final GameDraftRequest gameDraft, final GameStatus gameStatus) {
         return GameDO.builder()

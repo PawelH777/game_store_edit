@@ -28,4 +28,9 @@ public class GameServiceImpl implements GameService {
     public void changeGameStatus(final Long id, final GameStatus newGameStatus) {
         gameRepositoryAdapter.save(id, newGameStatus);
     }
+
+    @Override
+    public void deleteGame(final long id) {
+        gameRepositoryAdapter.deleteById(id);
+    }
 }

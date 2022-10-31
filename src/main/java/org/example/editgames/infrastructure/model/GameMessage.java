@@ -11,6 +11,7 @@ public record GameMessage(@JsonProperty("id") long id,
                           @JsonProperty("name") String name,
                           @JsonProperty("genre") String genre,
                           @JsonProperty("price") BigDecimal price,
-                          @JsonProperty("status") GameStatus status) {
+                          @JsonProperty("status") GameStatus status,
+                          @JsonProperty("eventType") EventType eventType) {
 
 }

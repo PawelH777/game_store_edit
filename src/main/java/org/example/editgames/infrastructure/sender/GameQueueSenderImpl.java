@@ -1,6 +1,7 @@
 package org.example.editgames.infrastructure.sender;
 
 import org.example.editgames.infrastructure.config.RabbitmqConfig;
+import org.example.editgames.infrastructure.model.EventType;
 import org.example.editgames.infrastructure.model.Game;
 import org.example.editgames.infrastructure.model.GameMessage;
 import org.slf4j.Logger;
@@ -20,13 +21,14 @@ public class GameQueueSenderImpl implements GameQueueSender {
     }
 
     @Override
-    public void sendMessageWithGameInfo(final Game game) {
+    public void sendMessageWithGameInfo(final Game game, final EventType eventType) {
         final GameMessage gameMessage = GameMessage.builder()
                 .id(game.getId())
                 .name(game.getName())
                 .genre(game.getGenre())
                 .price(game.getPrice())
                 .status(game.getGameStatus())
+                .eventType(eventType)
                 .build();
 
         logger.info("Send info about game to " + RabbitmqConfig.topicExchangeName + " topic");

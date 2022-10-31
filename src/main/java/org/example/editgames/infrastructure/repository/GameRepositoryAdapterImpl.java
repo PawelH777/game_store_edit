@@ -2,6 +2,7 @@ package org.example.editgames.infrastructure.repository;
 
 import org.example.editgames.domain.model.GameDO;
 import org.example.editgames.domain.model.GameStatus;
+import org.example.editgames.infrastructure.model.EventType;
 import org.example.editgames.infrastructure.model.Game;
 import org.example.editgames.infrastructure.sender.GameQueueSender;
 import org.springframework.stereotype.Component;
@@ -58,9 +59,23 @@ public class GameRepositoryAdapterImpl implements GameRepositoryAdapter {
                     .price(oldGame.getPrice())
                     .gameStatus(gameStatus)
                     .build();
-
             final Game updatedGame = gameRepository.save(game);
-            gameQueueSender.sendMessageWithGameInfo(updatedGame);
+
+            if (gameStatus.equals(GameStatus.PUBLISHED)) {
+                gameQueueSender.sendMessageWithGameInfo(updatedGame, EventType.GAME_PUBLISHED);
+            } else if (gameStatus.equals(GameStatus.UNPUBLISHED)) {
+                gameQueueSender.sendMessageWithGameInfo(updatedGame, EventType.GAME_UNPUBLISHED);
+            }
         });
+    }
+
+    @Override
+    public void deleteById(final long id) {
+        gameRepository.deleteById(id);
+
+        final Game game = Game.builder()
+                .id(id)
+                .build();
+        gameQueueSender.sendMessageWithGameInfo(game, EventType.GAME_DELETED);
     }
 }

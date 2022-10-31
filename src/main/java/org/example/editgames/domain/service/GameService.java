@@ -11,4 +11,6 @@ public interface GameService {
     void updateGame(Long id, GameDO gameDOToBeUpdated);
 
     void changeGameStatus(Long id, GameStatus newGameStatus);
+
+    void deleteGame(long id);
 }
