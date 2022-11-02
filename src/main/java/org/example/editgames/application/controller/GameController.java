@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/games")
+@RequestMapping("/api")
 public class GameController {
 
     private final GameService gameService;
@@ -26,19 +26,19 @@ public class GameController {
                 .body(CreateGameResponse.builder().id(newGameId).build());
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     ResponseEntity<Object> updateGame(@PathVariable final long id, @RequestBody final GameDraftRequest gameDraftRequest) {
         gameService.updateGame(id, buildGame(gameDraftRequest, GameStatus.MODIFIED));
         return ResponseEntity.status(200).build();
     }
 
-    @PatchMapping("{id}")
+    @PatchMapping("/{id}")
     ResponseEntity<Object> changeGameStatus(@PathVariable final long id, @RequestBody final ChangeGameStatusRequest changeGameStatusRequest) {
         gameService.changeGameStatus(id, changeGameStatusRequest.getGameStatus());
         return ResponseEntity.status(200).build();
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     ResponseEntity<Object> deleteGame(@PathVariable final long id) {
         gameService.deleteGame(id);
         return ResponseEntity.status(200).build();
